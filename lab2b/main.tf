@@ -89,6 +89,11 @@ resource "azurerm_management_lock" "rg_lock" {
   scope      = azurerm_resource_group.rg2.id
   lock_level = "CanNotDelete"
   notes      = "Prevents accidental deletion of the resource group"
+
+  depends_on = [
+    azapi_resource.require_tag_assignment,
+    azapi_resource.inherit_tag_assignment
+  ]
 }
 
 output "resource_group_name" {
